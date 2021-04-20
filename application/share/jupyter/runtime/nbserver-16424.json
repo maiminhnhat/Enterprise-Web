@@ -1,0 +1,12 @@
+{
+  "base_url": "/",
+  "hostname": "localhost",
+  "notebook_dir": "C:\\Users\\phong\\Desktop\\get_data_india",
+  "password": false,
+  "pid": 16424,
+  "port": 8888,
+  "secure": false,
+  "sock": "",
+  "token": "1b00d3750552bd7a0d8b29457f64e42ebee1defc9691c7d1",
+  "url": "http://localhost:8888/"
+}
