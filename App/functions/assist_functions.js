@@ -43,7 +43,14 @@ var download =  async function (req,res,path) {
     if(req.query.title != undefined && req.query.title != "" ){
         download_name = req.query.title
     } 
-
+    console.log(path)
+    await fs.readFile(path, 'utf8', (err, data) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(data);
+        }
+    });
     await res.zip({
         files: [{
             path: path,
