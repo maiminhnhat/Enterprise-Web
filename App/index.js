@@ -545,9 +545,24 @@ app.get('/admin/file_manage', (req, res, next) => {
 app.get('/admin', (req, res, next) => {
   if(get_role(req) != "admin")
     next()
-  res.locals.title = 'Home'
-  res.locals.username = get_name(req)
-  res.render('admin', admin_layout);
+    staff.user.list(req, (content1) => {
+      staff.faculty.list(req, (content2) => {
+        content = Object.assign({}, content1, content2)
+        
+        res.locals = content
+        res.locals.title = 'User'
+       
+        res.locals.search = req.query
+        res.locals.username = get_name(req)
+        res.locals.title = 'Home'
+        res.locals.username = get_name(req)
+       res.render('admin', admin_layout);
+        
+      })
+    
+    })
+
+ 
 });
 
 app.get('/admin/topic_manage', (req, res, next) => {
@@ -705,9 +720,23 @@ app.get('/manager/file_manage', (req, res, next) => {
 app.get('/manager', (req, res, next) => {
   if(get_role(req) != "manager")
     next()
-  res.locals.title = 'Home'
-  res.locals.username = get_name(req)
-  res.render('manager', manager_layout);
+    staff.student.list(req, (content1) => {
+      staff.faculty.list(req, (content2) => {
+        content = Object.assign({}, content1, content2)
+        
+        res.locals = content
+        res.locals.title = 'Student'
+       
+        res.locals.search = req.query
+        res.locals.username = get_name(req)
+        res.locals.title = 'Home'
+        res.locals.username = get_name(req)
+        res.render('manager', manager_layout);
+        
+      })
+    
+    })
+ 
 });
 
 app.get('/manager/topic_manage', (req, res, next) => {
@@ -859,9 +888,19 @@ app.get('/coordinate/file_manage', (req, res, next) => {
 app.get('/coordinate', (req, res, next) => {
   if(get_role(req) != "coordinate")
     next()
-  res.locals.title = 'Home'
-  res.locals.username = get_name(req)
-  res.render('coordinate', coordinate_layout);
+    staff.student.list(req, (content1) => {
+      
+      res.locals = content
+      res.locals.title = 'Student'
+      res.locals.faculty = req.session.user.faculty_id
+      res.locals.search = req.query
+      res.locals.username = get_name(req)
+      res.locals.title = 'Home'
+      res.locals.username = get_name(req)
+      res.render('coordinate', coordinate_layout);
+  
+  })
+
 });
 
 app.get('/coordinate/topic_manage', (req, res, next) => {
